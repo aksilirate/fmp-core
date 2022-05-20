@@ -1,0 +1,5 @@
+name: BuildCooldown
+version: '1.0'
+main: me.axilirate.buildcooldown.BuildCooldown
+api-version: 1.18
+authors: [ axilirate ]
