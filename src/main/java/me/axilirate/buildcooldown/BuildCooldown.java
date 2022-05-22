@@ -74,7 +74,20 @@ public final class BuildCooldown extends JavaPlugin implements Listener {
 
         if (!playerData.has(buildCooldownKey, PersistentDataType.INTEGER)){
             playerData.set(buildCooldownKey, PersistentDataType.INTEGER, 0);
+            return;
         }
+
+        int playerBuildCooldown = playerData.get(buildCooldownKey, PersistentDataType.INTEGER);
+        int offlineTime = (int) ((System.currentTimeMillis() - player.getLastPlayed()) * 0.001);
+
+        int totalTime = playerBuildCooldown - offlineTime;
+        if (totalTime < 0){
+            totalTime = 0;
+        }
+
+        playerData.set(buildCooldownKey, PersistentDataType.INTEGER, totalTime);
+
+
     }
 
 

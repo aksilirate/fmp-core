@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="buildcooldown:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/buildcooldown_jar</output-path>
+    <root id="archive" name="buildcooldown.jar">
+      <element id="module-output" name="buildcooldown" />
+    </root>
+  </artifact>
+</component>
