@@ -1,5 +1,7 @@
-name: BuildCooldown
+name: FMPCore
 version: '${project.version}'
-main: me.axilirate.buildcooldown.BuildCooldown
+main: me.axilirate.fmpcore.FMPCore
 api-version: 1.18
 authors: [ axilirate ]
+depend:
+  - DiscordSRV
