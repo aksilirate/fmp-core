@@ -394,8 +394,6 @@ public final class FMPCore extends JavaPlugin implements Listener {
 
 
 
-
-
         Objective objective = player.getScoreboard().getObjective("buildbreakcooldowns");
 
         Location location = player.getLocation();
@@ -404,7 +402,9 @@ public final class FMPCore extends JavaPlugin implements Listener {
         int x = Math.abs(location.getBlockX());
         int z = Math.abs(location.getBlockZ());
 
-        float rate = Math.max((float) x, (float) z) * hungerMultiplayer;
+        float rate = getHungerRate(player);
+
+
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
@@ -418,7 +418,7 @@ public final class FMPCore extends JavaPlugin implements Listener {
                     ChatMessageType.ACTION_BAR,
                     new TextComponent("Protection: Off | Slow Mode: Off | Hunger Rate: " + formattedRate));
 
-            objective.setDisplayName(ChatColor.BOLD + "3rd Layer In " + Integer.toString(blocksLeft - 2500) + " Blocks");
+            objective.setDisplayName(ChatColor.BOLD + "2nd Layer In " + Integer.toString(blocksLeft - 2500) + " Blocks");
 
             return;
         }
@@ -527,12 +527,8 @@ public final class FMPCore extends JavaPlugin implements Listener {
         if (event.getEntity() instanceof Player){
             Player player = (((Player) event.getEntity()).getPlayer());
 
-            Location location = player.getLocation();
-            int x = Math.abs(location.getBlockX());
-            int z = Math.abs(location.getBlockZ());
 
-
-            float rate = Math.max((float) x, (float) z) * hungerMultiplayer;
+            float rate = getHungerRate(player);
 
 
             event.setExhaustion(event.getExhaustion() * rate);
@@ -544,9 +540,29 @@ public final class FMPCore extends JavaPlugin implements Listener {
         }
 
 
+    }
 
+
+
+
+
+    public float getHungerRate(Player player){
+        Location location = player.getLocation();
+        int x = Math.abs(location.getBlockX());
+        int z = Math.abs(location.getBlockZ());
+
+
+
+        if (player.getWorld().getName().equals("world_the_end")){
+            return 1.0f + (Math.max((float) x, (float) z) * hungerMultiplayer * 0.1f);
+        }
+
+
+        return Math.max((float) x, (float) z) * hungerMultiplayer;
 
     }
+
+
 
 
 
